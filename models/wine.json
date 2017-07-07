@@ -1,0 +1,33 @@
+{
+  "name": "wine",
+  "plural": "wines",
+  "classname": "Wine",
+  "properties": {
+    "id": {
+      "type": "string",
+      "id": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "year": {
+      "type": "string"
+    },
+    "grade": {
+      "type": "number"
+    },
+    "kind": {
+      "type": "string"
+    },
+    "comment": {
+      "type": "string"
+    },
+    "pdo": {
+      "type": "string"
+    },
+    "image": {
+      "type": "string"
+    }
+  }
+}

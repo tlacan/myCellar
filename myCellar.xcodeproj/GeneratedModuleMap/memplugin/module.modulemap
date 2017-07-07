@@ -1,0 +1,4 @@
+module memplugin {
+    umbrella "/Users/thomaslacan/Documents/git/cellar-Kitura/myCellar/.build/checkouts/SwiftMetrics.git-8417478658542232501/Sources/memplugin/include"
+    export *
+}

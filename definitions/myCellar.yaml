@@ -1,0 +1,298 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: myCellar
+schemes:
+  - http
+basePath: /api
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  '/users/{id}':
+    get:
+      tags:
+        - user
+      summary: 'Find a model instance by {{id}}'
+      operationId: user.findOne
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user'
+      deprecated: false
+    put:
+      tags:
+        - user
+      summary: Put attributes for a model instance and persist it
+      operationId: user.replace
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: true
+          schema:
+            $ref: '#/definitions/user'
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user'
+      deprecated: false
+    patch:
+      tags:
+        - user
+      summary: Patch attributes for a model instance and persist it
+      operationId: user.update
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: true
+          schema:
+            $ref: '#/definitions/user'
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user'
+      deprecated: false
+    delete:
+      tags:
+        - user
+      summary: 'Delete a model instance by {{id}}'
+      operationId: user.delete
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  /users:
+    post:
+      tags:
+        - user
+      summary: Create a new instance of the model and persist it
+      operationId: user.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: true
+          schema:
+            $ref: '#/definitions/user'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/user'
+      deprecated: false
+    get:
+      tags:
+        - user
+      summary: Find all instances of the model
+      operationId: user.findAll
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/user'
+      deprecated: false
+    delete:
+      tags:
+        - user
+      summary: Delete all instances of the model
+      operationId: user.deleteAll
+      responses:
+        '200':
+          description: Request was successful
+      deprecated: false
+  '/wines/{id}':
+    get:
+      tags:
+        - wine
+      summary: 'Find a model instance by {{id}}'
+      operationId: wine.findOne
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/wine'
+      deprecated: false
+    put:
+      tags:
+        - wine
+      summary: Put attributes for a model instance and persist it
+      operationId: wine.replace
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: true
+          schema:
+            $ref: '#/definitions/wine'
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/wine'
+      deprecated: false
+    patch:
+      tags:
+        - wine
+      summary: Patch attributes for a model instance and persist it
+      operationId: wine.update
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: true
+          schema:
+            $ref: '#/definitions/wine'
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/wine'
+      deprecated: false
+    delete:
+      tags:
+        - wine
+      summary: 'Delete a model instance by {{id}}'
+      operationId: wine.delete
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  /wines:
+    post:
+      tags:
+        - wine
+      summary: Create a new instance of the model and persist it
+      operationId: wine.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: true
+          schema:
+            $ref: '#/definitions/wine'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/wine'
+      deprecated: false
+    get:
+      tags:
+        - wine
+      summary: Find all instances of the model
+      operationId: wine.findAll
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/wine'
+      deprecated: false
+    delete:
+      tags:
+        - wine
+      summary: Delete all instances of the model
+      operationId: wine.deleteAll
+      responses:
+        '200':
+          description: Request was successful
+      deprecated: false
+definitions:
+  user:
+    properties:
+      id:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+    additionalProperties: false
+    required:
+      - email
+      - password
+  wine:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      year:
+        type: string
+      grade:
+        type: number
+      kind:
+        type: string
+      comment:
+        type: string
+      pdo:
+        type: string
+      image:
+        type: string
+    additionalProperties: false
+    required:
+      - name
