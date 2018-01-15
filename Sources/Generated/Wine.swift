@@ -9,8 +9,9 @@ public struct Wine {
     public let comment: String?
     public let pdo: String?
     public let image: String?
+    public let quantity: Double?
 
-    public init(id: String?, name: String, year: String?, grade: Double?, kind: String?, comment: String?, pdo: String?, image: String?) {
+    public init(id: String?, name: String, year: String?, grade: Double?, kind: String?, comment: String?, pdo: String?, image: String?, quantity: Double?) {
         self.id = id
         self.name = name
         self.year = year
@@ -19,6 +20,7 @@ public struct Wine {
         self.comment = comment
         self.pdo = pdo
         self.image = image
+        self.quantity = quantity
     }
 
     public init(json: JSON) throws {
@@ -67,10 +69,16 @@ public struct Wine {
             throw ModelError.propertyTypeMismatch(name: "image", type: "string", value: json["image"].description, valueType: String(describing: json["image"].type))
         }
         self.image = json["image"].string
-
+        
+        if json["quantity"].exists() &&
+            json["quantity"].type != .number {
+            throw ModelError.propertyTypeMismatch(name: "quantity", type: "number", value: json["quantity"].description, valueType: String(describing: json["quantity"].type))
+        }
+        self.quantity = json["quantity"].number.map { Double($0) }
+        
         // Check for extraneous properties
         if let jsonProperties = json.dictionary?.keys {
-            let properties: [String] = ["id", "name", "year", "grade", "kind", "comment", "pdo", "image"]
+            let properties: [String] = ["id", "name", "year", "grade", "kind", "comment", "pdo", "image", "quantity"]
             for jsonPropertyName in jsonProperties {
                 if !properties.contains(where: { $0 == jsonPropertyName }) {
                     throw ModelError.extraneousProperty(name: jsonPropertyName)
@@ -131,6 +139,12 @@ public struct Wine {
             throw ModelError.propertyTypeMismatch(name: "image", type: "string", value: json["image"].description, valueType: String(describing: json["image"].type))
         }
         let image = json["image"].string ?? self.image
+        
+        if json["quantity"].exists() &&
+            json["quantity"].type != .number {
+            throw ModelError.propertyTypeMismatch(name: "quantity", type: "number", value: json["quantity"].description, valueType: String(describing: json["quantity"].type))
+        }
+        let quantity = json["quantity"].number.map { Double($0) } ?? self.quantity
 
         return Wine(id: id, name: name, year: year, grade: grade, kind: kind, comment: comment, pdo: pdo, image: image)
     }
@@ -159,6 +173,9 @@ public struct Wine {
         }
         if let image = image {
             result["image"] = JSON(image)
+        }
+        if let quantity = quantity {
+            result["quantity"] = JSON(quantity)
         }
 
         return result
